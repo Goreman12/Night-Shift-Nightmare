@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn44ngob0qrnj"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_puwc8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qesxm"]
+
+[node name="GarbageEnemy" type="CharacterBody2D" groups=["Enemy"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(20, 20)
+texture = SubResource("PlaceholderTexture2D_puwc8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qesxm")
+debug_color = Color(0.365887, 0.010476, 0.125545, 0.42)
