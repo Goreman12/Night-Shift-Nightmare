@@ -1,10 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cn44ngob0qrnj"]
+[gd_scene load_steps=5 format=3 uid="uid://cn44ngob0qrnj"]
+
+[ext_resource type="Script" uid="uid://bjpeujhttyiwq" path="res://Scenes/garbage_enemy.gd" id="1_qesxm"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_puwc8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qesxm"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_puwc8"]
+radius = 112.018
+
 [node name="GarbageEnemy" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_qesxm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)
@@ -14,3 +20,10 @@ texture = SubResource("PlaceholderTexture2D_puwc8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qesxm")
 debug_color = Color(0.365887, 0.010476, 0.125545, 0.42)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_puwc8")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

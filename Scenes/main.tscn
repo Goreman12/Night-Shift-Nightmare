@@ -6,7 +6,8 @@
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_jjgbg")]
-position = Vector2(32, 130)
+position = Vector2(34, 108)
 
 [node name="GarbageEnemy" parent="." instance=ExtResource("2_bo1nx")]
-position = Vector2(118, 129)
+position = Vector2(182, 139)
+speed = null
