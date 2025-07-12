@@ -1,8 +1,12 @@
 extends CharacterBody2D
 
+@onready var player: CharacterBody2D = $"../Player"
+
 @export var speed = 2000
-var acceleration: int = 5
-var distance_to_player = Vector2.ZERO
+var acceleration: int = 1.2
+var distance_to_player = Vector2()
+var direction
+var detected_player: bool = false
 
 func _ready() -> void:
 	pass # Replace with function body.
@@ -10,11 +14,16 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	var player_pos = $"../Player".positition
-	
+	if detected_player:
+		distance_to_player = player.position - position
+		direction = distance_to_player.normalized()
+		velocity = direction * speed * acceleration * delta
+		move_and_slide()
 
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
+		detected_player = true
+		print("Detected: ", body.name)
 		

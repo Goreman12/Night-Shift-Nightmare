@@ -10,4 +10,3 @@ position = Vector2(34, 108)
 
 [node name="GarbageEnemy" parent="." instance=ExtResource("2_bo1nx")]
 position = Vector2(182, 139)
-speed = null
