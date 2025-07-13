@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2xufki6geyh4"
-path="res://.godot/imported/Basement-Sheet.png-2b26c134a3bec275348ddfa8fc449f41.ctex"
+uid="uid://bqt7pvenehi3u"
+path="res://.godot/imported/Sprite-Gar-Bot-Sheet.png-1f16804debbb6a5a179e72431a5e16c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Basement-Sheet.png"
-dest_files=["res://.godot/imported/Basement-Sheet.png-2b26c134a3bec275348ddfa8fc449f41.ctex"]
+source_file="res://Assets/Sprite-Gar-Bot-Sheet.png"
+dest_files=["res://.godot/imported/Sprite-Gar-Bot-Sheet.png-1f16804debbb6a5a179e72431a5e16c0.ctex"]
 
 [params]
 

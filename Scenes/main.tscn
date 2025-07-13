@@ -1,12 +1,53 @@
-[gd_scene load_steps=3 format=3 uid="uid://dob5wbg0ubu5y"]
+[gd_scene load_steps=6 format=4 uid="uid://dob5wbg0ubu5y"]
 
+[ext_resource type="Texture2D" uid="uid://0uebut8haq17" path="res://Assets/Sprites_Basement-Sheet.png" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cmnolao5cpqv7" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://cn44ngob0qrnj" path="res://Scenes/garbage_enemy.tscn" id="2_bo1nx"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8gbba"]
+texture = ExtResource("1_8gbba")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+2:0/size_in_atlas = Vector2i(2, 2)
+2:0/0 = 0
+4:0/size_in_atlas = Vector2i(2, 2)
+4:0/0 = 0
+6:0/size_in_atlas = Vector2i(2, 2)
+6:0/0 = 0
+8:0/size_in_atlas = Vector2i(2, 2)
+8:0/0 = 0
+10:0/size_in_atlas = Vector2i(2, 2)
+10:0/0 = 0
+12:0/size_in_atlas = Vector2i(2, 2)
+12:0/0 = 0
+14:0/size_in_atlas = Vector2i(2, 2)
+14:0/0 = 0
+16:0/size_in_atlas = Vector2i(2, 2)
+16:0/0 = 0
+18:0/size_in_atlas = Vector2i(2, 2)
+18:0/0 = 0
+20:0/size_in_atlas = Vector2i(2, 2)
+20:0/0 = 0
+22:0/size_in_atlas = Vector2i(2, 2)
+22:0/0 = 0
+24:0/size_in_atlas = Vector2i(2, 2)
+24:0/0 = 0
 
-[node name="Player" parent="." instance=ExtResource("1_jjgbg")]
-position = Vector2(34, 108)
+[sub_resource type="TileSet" id="TileSet_jjvhh"]
+tile_size = Vector2i(32, 32)
+sources/3 = SubResource("TileSetAtlasSource_8gbba")
+
+[node name="Main" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [264.0, 245.0]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAQAAwAIAAAAAAABAAQAAwAIAAAAAAACAAQAAwAIAAAAAAADAAQAAwAIAAAAAAAEAAQAAwAIAAAAAAAFAAQAAwAIAAAAAAAAAAMAAwAIAAAAAAABAAMAAwAIAAAAAAACAAMAAwAIAAAAAAADAAMAAwAIAAAAAAAEAAMAAwAIAAAAAAAFAAMAAwAIAAAAAAAAAAUAAwAIAAAAAAABAAUAAwAIAAAAAAACAAUAAwAIAAAAAAADAAUAAwAIAAAAAAAEAAUAAwAIAAAAAAAFAAUAAwAIAAAAAAA=")
+tile_set = SubResource("TileSet_jjvhh")
 
 [node name="GarbageEnemy" parent="." instance=ExtResource("2_bo1nx")]
-position = Vector2(182, 139)
+light_mask = 3
+visibility_layer = 3
+position = Vector2(15, 158)
+
+[node name="Player" parent="." instance=ExtResource("1_jjgbg")]
+position = Vector2(44, 158)
