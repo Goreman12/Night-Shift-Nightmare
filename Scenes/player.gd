@@ -1,9 +1,17 @@
 extends CharacterBody2D
 
 @export var speed = 500
+
+signal attacked(damage)
+
+var player_damage: int = 25
+
 var acceleration: float = 5
 var move_direction: Vector2
 var can_attack: bool = true
+var last_moved_direction = "right"
+var is_attacking = false
+
 
 func _ready() -> void:
 	pass
@@ -11,38 +19,53 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	move_direction = Vector2.ZERO
 	move_player(delta)
-	
 	attack_melee()
-	pass
 
 
 func move_player(delta):
-	
-	if Input.is_action_pressed("right"):
-		move_direction = Vector2.RIGHT
-	if Input.is_action_pressed("left"):
-		move_direction = Vector2.LEFT
-	if move_direction.x == 0 and can_attack:
-		$AnimatedSprite2D.play("idle")
+	if not is_attacking:
+		if Input.is_action_pressed("right"):
+			move_direction = Vector2.RIGHT
+			last_moved_direction = "right"
+		if Input.is_action_pressed("left"):
+			move_direction = Vector2.LEFT
+			last_moved_direction = "left"
+		
 	velocity = move_direction * speed * acceleration * delta
 	move_and_slide()
 	
 
 func attack_melee():
 	var timer = $MeleeRecoveryTimer
-	var collision = $MeleeArea2D/CollisionShape2D
-	
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and timer.is_stopped():
-		collision.set_deferred("disabled", 0)
-		$AnimatedSprite2D.play("attack_left")
-		timer.start()
+	var collision = $MeleeArea2D/MeleeHitBox
+	is_attacking = true
+	collision.set_deferred("disabled", 0)
+	if Input.is_action_just_pressed("attack") and timer.is_stopped():
+		if last_moved_direction == "right":
+			collision.set_deferred("disabled", 0)
+			$AnimatedSprite2D.play("attack_right")
+			timer.start()
+		else:
+			collision.set_deferred("disabled", 0)
+			$AnimatedSprite2D.play("attack_left")
+			timer.start()
 	if timer.is_stopped() or not can_attack:
-		$AnimatedSprite2D.stop()
+		
 		collision.set_deferred("disabled", 1)
 		can_attack = true
+		$AnimatedSprite2D.stop()
+		is_attacking = false
 
 
-func _on_melee_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Enemy"):
+	
+
+
+func _on_melee_area_2d_area_entered(area: Area2D) -> void:
+	if area.owner.has_method("take_damage"):
+		print("Can take damage!")
+		
+	if area.owner.is_in_group("Enemy"):
+		$MeleeArea2D/MeleeHitBox.set_deferred("disabled", 1)
+		print("Entered")
+		attacked.emit(player_damage)
 		print("You attacked an enemy!")
-		$MeleeArea2D/CollisionShape2D.set_deferred("disabled", 1)

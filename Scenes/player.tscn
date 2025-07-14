@@ -183,41 +183,42 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0iea"]
-size = Vector2(121, 539)
+size = Vector2(3.95429, 27.0767)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
-size = Vector2(9.61407, 45.4546)
+size = Vector2(10.5773, 24.5663)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_v0iea")
 metadata/_edit_horizontal_guides_ = [-117.0]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_l6n3p")
-animation = &"attack_right"
+animation = &"attack_left"
 autoplay = "idle"
 
 [node name="PlayerHitBox" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-0.5, 50.5)
+position = Vector2(0.0804615, 0.974808)
 shape = SubResource("RectangleShape2D_v0iea")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, -8)
-zoom = Vector2(13.5, 13.5)
+zoom = Vector2(6, 6)
 limit_bottom = 263
 
 [node name="MeleeArea2D" type="Area2D" parent="."]
-position = Vector2(15, 0)
+position = Vector2(-7.34935, 2.44089)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeArea2D"]
-position = Vector2(-22.7522, -7.14779)
+[node name="MeleeHitBox" type="CollisionShape2D" parent="MeleeArea2D"]
+position = Vector2(0.134874, 0.0930943)
 shape = SubResource("RectangleShape2D_cvnsp")
 disabled = true
 
 [node name="MeleeRecoveryTimer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="area_entered" from="MeleeArea2D" to="." method="_on_melee_area_2d_area_entered"]
 [connection signal="body_entered" from="MeleeArea2D" to="." method="_on_melee_area_2d_body_entered"]
 [connection signal="timeout" from="MeleeRecoveryTimer" to="." method="_on_recovery_timer_timeout"]

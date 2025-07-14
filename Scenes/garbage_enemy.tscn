@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cn44ngob0qrnj"]
+[gd_scene load_steps=14 format=3 uid="uid://cn44ngob0qrnj"]
 
 [ext_resource type="Script" uid="uid://bjpeujhttyiwq" path="res://Scenes/garbage_enemy.gd" id="1_qesxm"]
 [ext_resource type="Texture2D" uid="uid://bqt7pvenehi3u" path="res://Assets/Sprite-Gar-Bot-Sheet.png" id="2_gr2a3"]
@@ -61,31 +61,40 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qesxm"]
-size = Vector2(24, 27)
+size = Vector2(10, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_puwc8"]
-radius = 12.0416
+radius = 39.1152
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gr2a3"]
+radius = 11.0
 
 [node name="GarbageEnemy" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 3
 script = ExtResource("1_qesxm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_14twa")
 autoplay = "default"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 2.5)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(3, 5)
 shape = SubResource("RectangleShape2D_qesxm")
 debug_color = Color(0.365887, 0.010476, 0.125545, 0.42)
 
-[node name="Area2D" type="Area2D" parent="."]
-monitoring = false
+[node name="DetectionArea2D" type="Area2D" parent="."]
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea2D"]
 position = Vector2(-1, 4)
 shape = SubResource("CircleShape2D_puwc8")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="HurtBoxArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxArea2D"]
+position = Vector2(3, 8)
+shape = SubResource("CircleShape2D_gr2a3")
+debug_color = Color(0.957523, 0.0288581, 0.516579, 0.42)
+
+[connection signal="body_entered" from="DetectionArea2D" to="." method="_on_area_2d_body_entered"]
