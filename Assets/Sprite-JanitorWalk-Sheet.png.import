@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bir608usp3k8h"
-path="res://.godot/imported/Sprite-Gar-Bot-Sheet.png-1f16804debbb6a5a179e72431a5e16c0.ctex"
+uid="uid://cqflcpxhpmq8y"
+path="res://.godot/imported/Sprite-JanitorWalk-Sheet.png-bea92b1f26bd031e039b01934d350421.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprite-Gar-Bot-Sheet.png"
-dest_files=["res://.godot/imported/Sprite-Gar-Bot-Sheet.png-1f16804debbb6a5a179e72431a5e16c0.ctex"]
+source_file="res://Assets/Sprite-JanitorWalk-Sheet.png"
+dest_files=["res://.godot/imported/Sprite-JanitorWalk-Sheet.png-bea92b1f26bd031e039b01934d350421.ctex"]
 
 [params]
 

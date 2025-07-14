@@ -38,34 +38,31 @@ func move_player(delta):
 func attack_melee():
 	var timer = $MeleeRecoveryTimer
 	var collision = $MeleeArea2D/MeleeHitBox
+	
 	is_attacking = true
 	collision.set_deferred("disabled", 0)
-	if Input.is_action_just_pressed("attack") and timer.is_stopped():
+	if Input.is_action_just_pressed("attack"):
 		if last_moved_direction == "right":
+			collision.position.x = 14.718
 			collision.set_deferred("disabled", 0)
 			$AnimatedSprite2D.play("attack_right")
 			timer.start()
-		else:
+		elif last_moved_direction == "left":
+			collision.position.x = 0.135
 			collision.set_deferred("disabled", 0)
 			$AnimatedSprite2D.play("attack_left")
 			timer.start()
-	if timer.is_stopped() or not can_attack:
-		
+	if timer.is_stopped() or !$AnimatedSprite2D.is_playing():
+		is_attacking = false
 		collision.set_deferred("disabled", 1)
 		can_attack = true
 		$AnimatedSprite2D.stop()
-		is_attacking = false
-
-
-	
+		
 
 
 func _on_melee_area_2d_area_entered(area: Area2D) -> void:
 	if area.owner.has_method("take_damage"):
-		print("Can take damage!")
-		
-	if area.owner.is_in_group("Enemy"):
+		var current_target = area.get_parent() as Node
+		current_target.take_damage(player_damage)
 		$MeleeArea2D/MeleeHitBox.set_deferred("disabled", 1)
-		print("Entered")
 		attacked.emit(player_damage)
-		print("You attacked an enemy!")

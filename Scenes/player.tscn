@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cmnolao5cpqv7"]
+[gd_scene load_steps=31 format=3 uid="uid://cmnolao5cpqv7"]
 
 [ext_resource type="Script" uid="uid://cpfqrbgunjhpu" path="res://Scenes/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://ben7smr6dsqje" path="res://Assets/Sprite-Janitor-Left-Sheet.png" id="2_6t5aa"]
@@ -117,9 +117,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gymyn")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_left",
-"speed": 6.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -143,9 +143,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0gysh")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_right",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -169,7 +169,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_igrcy")
 }],
-"loop": true,
+"loop": false,
 "name": &"door_enter",
 "speed": 5.0
 }, {
@@ -177,7 +177,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fs7ks")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle",
 "speed": 5.0
 }]
@@ -188,6 +188,11 @@ size = Vector2(3.95429, 27.0767)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
 size = Vector2(10.5773, 24.5663)
 
+[sub_resource type="Curve" id="Curve_vgqql"]
+_limits = [-372.49, 360.0, 0.0, 150.25]
+_data = [Vector2(0.398089, -47.4775), 0.0, 0.0, 0, 0]
+point_count = 1
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 3
 motion_mode = 1
@@ -196,7 +201,7 @@ metadata/_edit_horizontal_guides_ = [-117.0]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_l6n3p")
-animation = &"attack_left"
+animation = &"attack_right"
 autoplay = "idle"
 
 [node name="PlayerHitBox" type="CollisionShape2D" parent="."]
@@ -206,7 +211,7 @@ shape = SubResource("RectangleShape2D_v0iea")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, -8)
 zoom = Vector2(6, 6)
-limit_bottom = 263
+limit_bottom = 192
 
 [node name="MeleeArea2D" type="Area2D" parent="."]
 position = Vector2(-7.34935, 2.44089)
@@ -218,6 +223,24 @@ disabled = true
 
 [node name="MeleeRecoveryTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="WaterParticle" type="CPUParticles2D" parent="."]
+modulate = Color(0, 0.556863, 1, 1)
+emitting = false
+amount = 28
+lifetime = 0.19
+emission_shape = 2
+emission_sphere_radius = 5.4
+direction = Vector2(-2.42, -1.64)
+gravity = Vector2(-200, 200)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+angular_velocity_min = -420.0
+angular_velocity_curve = SubResource("Curve_vgqql")
+angle_min = -377.1
+angle_max = 557.2
+scale_amount_min = 0.0
+scale_amount_max = 0.25
 
 [connection signal="area_entered" from="MeleeArea2D" to="." method="_on_melee_area_2d_area_entered"]
 [connection signal="body_entered" from="MeleeArea2D" to="." method="_on_melee_area_2d_body_entered"]
