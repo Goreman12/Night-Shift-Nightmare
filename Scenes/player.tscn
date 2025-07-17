@@ -225,10 +225,11 @@ disabled = true
 one_shot = true
 
 [node name="WaterParticle" type="CPUParticles2D" parent="."]
+visible = false
 modulate = Color(0, 0.556863, 1, 1)
 emitting = false
-amount = 28
-lifetime = 0.19
+amount = 60
+one_shot = true
 emission_shape = 2
 emission_sphere_radius = 5.4
 direction = Vector2(-2.42, -1.64)
