@@ -1,13 +1,13 @@
 extends CharacterBody2D
 
-@export var speed = 500
+@export var speed = 1000
 
 signal attacked(damage)
 
 var player_damage: int = 25
 
-var acceleration: float = 5
-var move_direction: Vector2
+var acceleration: float = 2.5
+var direction
 var can_attack: bool = true
 var last_moved_direction = "right"
 var is_attacking = false
@@ -17,21 +17,19 @@ func _ready() -> void:
 	pass
 	
 func _physics_process(delta: float) -> void:
-	move_direction = Vector2.ZERO
 	move_player(delta)
 	attack_melee()
 
-
 func move_player(delta):
+	direction = Input.get_axis("left", "right")
 	if not is_attacking:
 		if Input.is_action_pressed("right"):
-			move_direction = Vector2.RIGHT
 			last_moved_direction = "right"
+			
 		if Input.is_action_pressed("left"):
-			move_direction = Vector2.LEFT
 			last_moved_direction = "left"
-		
-	velocity = move_direction * speed * acceleration * delta
+			
+	velocity.x = direction * speed * acceleration * delta
 	move_and_slide()
 	
 
@@ -39,9 +37,9 @@ func attack_melee():
 	var timer = $MeleeRecoveryTimer
 	var collision = $MeleeArea2D/MeleeHitBox
 	
-	is_attacking = true
 	collision.set_deferred("disabled", 0)
 	if Input.is_action_just_pressed("attack"):
+		is_attacking = true
 		if last_moved_direction == "right":
 			collision.position.x = 14.718
 			collision.set_deferred("disabled", 0)
