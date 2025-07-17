@@ -6,7 +6,7 @@ signal attacked(damage)
 
 var player_damage: int = 25
 
-var acceleration: float = 2.5
+var acceleration: float = 2.2
 var direction
 var can_attack: bool = true
 var last_moved_direction = "right"
@@ -20,6 +20,7 @@ func _physics_process(delta: float) -> void:
 	move_player(delta)
 	attack_melee()
 
+#Currently using flip_h to walk left, should revert this when we have an animation
 func move_player(delta):
 	direction = Input.get_axis("left", "right")
 	if not is_attacking:
@@ -37,7 +38,9 @@ func move_player(delta):
 	velocity.x = direction * speed * acceleration * delta
 	move_and_slide()
 	
-
+#Enemies get attacked twice if you attack while moving, unsure why, 
+#maybe add an on_hit function that removes the hitbox, or bring back the 
+#freeze movement effect
 func attack_melee():
 	var timer = $MeleeRecoveryTimer
 	var collision = $MeleeArea2D/MeleeHitBox
