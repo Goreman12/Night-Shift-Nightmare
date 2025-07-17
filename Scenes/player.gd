@@ -25,9 +25,14 @@ func move_player(delta):
 	if not is_attacking:
 		if Input.is_action_pressed("right"):
 			last_moved_direction = "right"
+			$AnimatedSprite2D.flip_h = false
+			$AnimatedSprite2D.play("walk")
 			
 		if Input.is_action_pressed("left"):
 			last_moved_direction = "left"
+			$AnimatedSprite2D.flip_h = true
+			$AnimatedSprite2D.play("walk")
+			
 			
 	velocity.x = direction * speed * acceleration * delta
 	move_and_slide()
@@ -54,7 +59,6 @@ func attack_melee():
 		is_attacking = false
 		collision.set_deferred("disabled", 1)
 		can_attack = true
-		$AnimatedSprite2D.stop()
 		
 
 
