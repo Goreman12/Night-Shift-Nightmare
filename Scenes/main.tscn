@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=4 uid="uid://dob5wbg0ubu5y"]
+[gd_scene load_steps=10 format=4 uid="uid://dob5wbg0ubu5y"]
 
 [ext_resource type="Texture2D" uid="uid://0uebut8haq17" path="res://Assets/Sprites_Basement-Sheet.png" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cmnolao5cpqv7" path="res://Scenes/player.tscn" id="1_jjgbg"]
+[ext_resource type="Texture2D" uid="uid://ey0im8l20bfm" path="res://Assets/Sprite-posta-boi-Sheet.png" id="1_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://cn44ngob0qrnj" path="res://Scenes/garbage_enemy.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://bqf0tq2m6oelj" path="res://Scenes/level_loader.tscn" id="5_kry3j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8gbba"]
 texture = ExtResource("1_8gbba")
@@ -37,26 +39,53 @@ texture = ExtResource("1_8gbba")
 tile_size = Vector2i(32, 32)
 sources/3 = SubResource("TileSetAtlasSource_8gbba")
 
-[node name="Main" type="Node2D"]
-metadata/_edit_horizontal_guides_ = [264.0, 245.0, 192.0]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_21xkr"]
+texture = ExtResource("1_jjvhh")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+2:0/size_in_atlas = Vector2i(2, 2)
+2:0/0 = 0
+4:0/size_in_atlas = Vector2i(2, 2)
+4:0/0 = 0
+6:0/size_in_atlas = Vector2i(2, 2)
+6:0/0 = 0
+8:0/size_in_atlas = Vector2i(6, 2)
+8:0/0 = 0
+14:1/size_in_atlas = Vector2i(2, 1)
+14:1/0 = 0
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAAQAAwAIAAAAAAABAAQAAwAIAAAAAAACAAQAAwAIAAAAAAADAAQAAwAIAAAAAAAEAAQAAwAIAAAAAAAFAAQAAwAIAAAAAAAAAAMAAwAIAAAAAAABAAMAAwAIAAAAAAACAAMAAwAIAAAAAAADAAMAAwAIAAAAAAAEAAMAAwAIAAAAAAAFAAMAAwAIAAAAAAAAAAUAAwAMAAAAAAABAAUAAwAIAAAAAAACAAUAAwAMAAAAAAADAAUAAwAIAAAAAAAEAAUAAwAMAAAAAAAFAAUAAwAKAAAAAAA=")
+[sub_resource type="TileSet" id="TileSet_6bp64"]
+tile_size = Vector2i(2, 2)
+sources/0 = SubResource("TileSetAtlasSource_21xkr")
+
+[node name="Main" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [264.0, 245.0, 192.0, 96.0]
+metadata/_edit_vertical_guides_ = [448.0, 0.0]
+
+[node name="WallLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAQAAwAIAAAAAAABAAQAAwAIAAAAAAACAAQAAwAIAAAAAAADAAQAAwAIAAAAAAAEAAQAAwAIAAAAAAAFAAQAAwAIAAAAAAAAAAMAAwAIAAAAAAABAAMAAwAIAAAAAAACAAMAAwAIAAAAAAADAAMAAwAIAAAAAAAEAAMAAwAIAAAAAAAFAAMAAwAIAAAAAAAAAAUAAwAMAAAAAAABAAUAAwAIAAAAAAACAAUAAwAMAAAAAAADAAUAAwAIAAAAAAAEAAUAAwAMAAAAAAAFAAUAAwAKAAAAAAAGAAUAAwAIAAAAAAAGAAQAAwAIAAAAAAAGAAMAAwAIAAAAAAAHAAUAAwAIAAAAAAAHAAQAAwAIAAAAAAAIAAQAAwAIAAAAAAAIAAUAAwAIAAAAAAAJAAUAAwAIAAAAAAAJAAQAAwAIAAAAAAAKAAQAAwAIAAAAAAAKAAUAAwAIAAAAAAALAAUAAwAIAAAAAAALAAQAAwAIAAAAAAAMAAUAAwAGAAAAAAAMAAQAAwAIAAAAAAANAAUAAwAIAAAAAAANAAQAAwAIAAAAAAAAAAIAAwAIAAAAAAABAAIAAwAIAAAAAAACAAIAAwAIAAAAAAADAAIAAwAIAAAAAAAEAAIAAwAIAAAAAAAFAAIAAwAIAAAAAAAGAAIAAwAIAAAAAAAHAAIAAwAIAAAAAAAHAAMAAwAIAAAAAAAIAAIAAwAIAAAAAAAIAAMAAwAIAAAAAAAJAAIAAwAIAAAAAAAJAAMAAwAIAAAAAAAKAAIAAwAIAAAAAAAKAAMAAwAIAAAAAAALAAIAAwAIAAAAAAALAAMAAwAIAAAAAAAMAAIAAwAIAAAAAAAMAAMAAwAIAAAAAAANAAIAAwAIAAAAAAANAAMAAwAIAAAAAAA=")
 tile_set = SubResource("TileSet_jjvhh")
+
+[node name="DecorationLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAA4AE8AAAAEAAAAAACHAFEAAAACAAAAAAAXAE8AAAAAAAAAAAB0AFwAAAAOAAEAAACBAFwAAAAOAAEAAACbAFwAAAAOAAEAAACgAFwAAAAOAAEAAACmAFwAAAAOAAEAAAAFADAAAAAGAAAAAAAlADAAAAAIAAAAAABOADAAAAAIAAAAAAB9ADAAAAAIAAAAAACtADAAAAAIAAAAAADcADAAAAAIAAAAAACkADoAAAAGAAAAAADEADoAAAAIAAAAAADzADoAAAAIAAAAAADZAFwAAAAOAAEAAAA=")
+tile_set = SubResource("TileSet_6bp64")
 
 [node name="GarbageEnemy" parent="." instance=ExtResource("2_bo1nx")]
 light_mask = 3
 visibility_layer = 3
-position = Vector2(113, 175)
+position = Vector2(113, 176)
 collision_mask = 1
 
 [node name="GarbageEnemy2" parent="." instance=ExtResource("2_bo1nx")]
-position = Vector2(49, 176)
+position = Vector2(74, 176)
 
 [node name="Player" parent="." instance=ExtResource("1_jjgbg")]
-position = Vector2(178, 176)
+position = Vector2(43, 176)
 
 [node name="GarbageEnemy3" parent="." instance=ExtResource("2_bo1nx")]
 position = Vector2(207, 176)
+
+[node name="LevelLoader" parent="." instance=ExtResource("5_kry3j")]
+position = Vector2(16, 178)
 
 [connection signal="attacked" from="Player" to="GarbageEnemy" method="_on_player_attacked"]
