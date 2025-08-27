@@ -11,4 +11,4 @@ func _process(delta: float) -> void:
 	pass
 
 func enter_room():
-	print("Entering!")
+	print("Entering Room!")

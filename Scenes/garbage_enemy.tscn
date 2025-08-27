@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://cn44ngob0qrnj"]
 
 [ext_resource type="Script" uid="uid://bjpeujhttyiwq" path="res://Scenes/garbage_enemy.gd" id="1_qesxm"]
-[ext_resource type="Texture2D" uid="uid://bir608usp3k8h" path="res://Assets/Sprite-Gar-Bot-Sheet.png" id="2_gr2a3"]
+[ext_resource type="Texture2D" uid="uid://bir608usp3k8h" path="res://Assets/Sprite-Gar-Bot-Sheets.png" id="2_gr2a3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gr2a3"]
 atlas = ExtResource("2_gr2a3")
