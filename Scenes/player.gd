@@ -17,10 +17,14 @@ var can_enter_room = false
 
 func _ready() -> void:
 	pass
+
 	
 func _physics_process(delta: float) -> void:
 	attack_melee()
 	move_player(delta)
+	for area in $DoorArea2D.get_overlapping_areas():
+		if area.owner.is_in_group("Door") and Input.is_action_just_pressed("Interact"):
+			print("Is a door")
 	
 
 #Currently using flip_h to walk left, should revert this when we have an animation
@@ -75,13 +79,3 @@ func _on_melee_area_2d_area_entered(area: Area2D) -> void:
 		current_target.take_damage(player_damage)
 		$MeleeArea2D/MeleeHitBox.set_deferred("disabled", 1)
 		attacked.emit(player_damage)
-
-
-func _on_door_area_2d_area_entered(area: Area2D) -> void:
-	if area.get_parent().is_in_group("Door"):
-		can_enter_room = true
-		print("This is a door!")
-		if Input.is_action_just_pressed("Interact") and can_enter_room:
-			var current_target = area.get_parent() as Node
-			print("Entering room...")
-			current_target.enter_room()
